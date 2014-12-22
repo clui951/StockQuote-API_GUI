@@ -1,32 +1,36 @@
 public class StockObj {
-	protected String symbol;
 	protected String name;
-	protected String time;
+	protected String symbol;
+	protected long time;
 	protected double price;
+	protected double openPrice;
+	protected double dayHigh;
+	protected double dayLow;
 	protected String link;
-	protected String html;
+	protected String[] csvData;
 	protected boolean valid = false;
 
 	public StockObj(String symbol) {
 		this.symbol = symbol;
-		this.link = "http://finance.yahoo.com/q?s=" + symbol;
+		// name, symbol, current trade, day open, high, low
+		this.link = "http://download.finance.yahoo.com/d/quotes.csv?s=%40%5EDJI,GOOG&f=n0sl1oh0g0&e=.csv";
 		this.updateQuote();
 		if ( !this.valid ) {
 			return;
 		}
-		// Set name of stock
-		int titleTag = this.html.indexOf("<title>", 0);
-		int nameFrom = this.html.indexOf("Summary for ", titleTag) + 12; //12 offset, start from after string
-		int nameTo = this.html.indexOf("- Yahoo! Finance", nameFrom);
-		String newName = this.html.substring(nameFrom, nameTo);
-		this.name = newName;
 	}
 
 	public void updateQuote() {
 		try {
-			this.html = GrabHTML.readHTML(this.link);
-			this.updatePrice();
-			this.updateTime();
+			String csv = GrabHTML.readHTML(this.link);
+			this.csvData = csv.split(",");
+			this.name = csvData[0];
+			this.symbol = csvData[1];
+			this.price = Double.parseDouble(csvData[2]);
+			this.openPrice = Double.parseDouble(csvData[3]);
+			this.dayHigh = Double.parseDouble(csvData[4]);
+			this.dayLow = Double.parseDouble(csvData[5]);
+			this.time = 0;
 			this.valid = true;
 		} catch (Exception e1) {
 //			e1.printStackTrace();
@@ -40,23 +44,12 @@ public class StockObj {
 		}
 		System.out.println("\n" + this.name + " - " + this.symbol);
 		System.out.println(this.time);
-		System.out.println("$ " + this.price + "\n");
+		System.out.println("Current: $" + this.price);
+		System.out.println("Open: $" + this.openPrice);
 	}
 
-	protected void updatePrice() {
-		int startTag = this.html.indexOf("yfs_l84", 0);
-		int priceFrom = this.html.indexOf( "\">", startTag) + 2; // 2 offset, start from after >
-		int priceTo = this.html.indexOf( "</span>", priceFrom);
-		String newPrice = this.html.substring( priceFrom, priceTo);
-		this.price = Double.parseDouble(newPrice);
-	}
 
-	protected void updateTime() {
-		int p = html.indexOf("<span id=\"yfs_market_time\">", 0);
-		int dateFrom = html.indexOf(">", p) + 1; // 1 offset, start after >
-		int dateTo = html.indexOf("-", dateFrom); // end on hyphen, before market close time
-		this.time = html.substring(dateFrom, dateTo);
-	}
+
 
 	public String getSymbol() {
 		return this.symbol;
@@ -66,7 +59,7 @@ public class StockObj {
 		return this.name;
 	}
 
-	public String getTime() {
+	public long getTime() {
 		return this.time;
 	}
 
@@ -74,8 +67,8 @@ public class StockObj {
 		return this.price;
 	}
 
-	public String getHtml() {
-		return this.html;
+	public String[] getCsvData() {
+		return this.csvData;
 	}
 
 	public boolean isValid() {
