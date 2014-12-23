@@ -1,7 +1,9 @@
+import java.security.acl.LastOwnerException;
 import java.util.Arrays;
 import java.util.Date;
 
 public class StockObj {
+	public static int CSV_DATA_LEN = 6;
 	protected String name;
 	protected String symbol;
 	protected String time;
@@ -16,7 +18,7 @@ public class StockObj {
 	public StockObj(String symbol) {
 		this.symbol = symbol;
 		// name, symbol, current trade, day open, high, low
-		this.link = "http://download.finance.yahoo.com/d/quotes.csv?s=%40%5EDJI,GOOG&f=n0sl1oh0g0&e=.csv";
+		this.link = "http://download.finance.yahoo.com/d/quotes.csv?s=AMZN&f=n0sl1oh0g0&e=.csv";
 		this.updateQuote();
 		if ( !this.valid ) {
 			return;
@@ -26,7 +28,19 @@ public class StockObj {
 	public void updateQuote() {
 		try {
 			String csv = GrabHTML.readHTML(this.link);
-			this.csvData = csv.split(",");
+			this.csvData = new String[CSV_DATA_LEN];
+			
+			// Handle cases with comma in stock name
+			// split into header/tail and parse individually, combining at end
+			String header = csv.substring(0, csv.lastIndexOf("\"")+1); // +1 to include last quotation
+			String tail = csv.substring(csv.lastIndexOf("\"") + 2, csv.length()); // +2 to rid of starting comma
+			this.csvData[0] = header.substring(0,header.lastIndexOf(",")); 
+			this.csvData[1] = header.substring(header.lastIndexOf(",")+1,header.length());	
+			String[] numbData = tail.split(",");
+			for (int i = 0; i < CSV_DATA_LEN - 2; i++) {
+				csvData[i+2] = numbData[i];
+			}
+			
 			this.name = csvData[0];
 			this.symbol = csvData[1];
 			this.price = Double.parseDouble(csvData[2]);
