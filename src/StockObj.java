@@ -17,8 +17,9 @@ public class StockObj {
 
 	public StockObj(String symbol) {
 		this.symbol = symbol;
+		// yahoo finance API for sock quotes
 		// name, symbol, current trade, day open, high, low
-		this.link = "http://download.finance.yahoo.com/d/quotes.csv?s=AMZN&f=n0sl1oh0g0&e=.csv";
+		this.link = "http://download.finance.yahoo.com/d/quotes.csv?s=" + symbol + "&f=n0sl1oh0g0&e=.csv";
 		this.updateQuote();
 		if ( !this.valid ) {
 			return;
@@ -57,7 +58,7 @@ public class StockObj {
 	
 	public void printStock() {
 		if ( !this.valid ) {
-			System.out.println("--- DATA IS CURRENTLY INVALID ---");
+			System.out.println("\n--- DATA IS CURRENTLY INVALID ---");
 		}
 		
 		// set up name underline

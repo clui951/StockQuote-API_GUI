@@ -1,22 +1,24 @@
+import java.util.Scanner;
+
 
 public class StockQuote2 {
 
 	static int LOOPS = 3;
 	
 	public static void main(String[] args) {
-		System.out.println("Hello, API Investor");
-		StockObj myStock = new StockObj("RHT");
-		myStock.printStock();
+		System.out.println("\nHello, API Investor");
 		
-//		for (int i = 0; i <= LOOPS; i++) {
-//			try {
-//			    Thread.sleep(5000);                 //10000 milliseconds is 5 seconds.
-//			} catch(InterruptedException ex) {
-//			    Thread.currentThread().interrupt();
-//			}
-//			myStock.updateQuote();
-//			myStock.printStock();
-//		}
+		while (true) {
+			Scanner in = new Scanner(System.in);
+			System.out.print("\nEnter a stock symbol ('quit' to quit): ");
+			String sym = in.nextLine();
+			if ( sym.equals("quit")) {
+				break;
+			}
+			StockObj myStock2 = new StockObj(sym);
+			myStock2.printStock();
+		}
+		
 	}
 
 }
