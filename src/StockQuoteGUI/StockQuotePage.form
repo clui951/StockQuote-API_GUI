@@ -28,6 +28,11 @@
               <Component id="jPanel1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="CloseButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -35,7 +40,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="116" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="CloseButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -53,10 +60,36 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="varSymbol" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="294" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="varTime" min="-2" max="-2" attributes="0"/>
+                      <Component id="varSymbol" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="57" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="Price_label" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="Open_label" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="varPrice" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="varOpen" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="High_label" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="Low_label" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="varLow" min="-2" max="-2" attributes="0"/>
+                      <Component id="varHigh" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -65,7 +98,23 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="varSymbol" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="132" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="varTime" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="varPrice" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Price_label" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="High_label" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="varHigh" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="Open_label" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="varOpen" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Low_label" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="varLow" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="20" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -73,10 +122,63 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="varSymbol">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel2"/>
+            <Property name="text" type="java.lang.String" value="NAME GOES HERE"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="varTime">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="TIME GOES HERE"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="Open_label">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Open:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="varOpen">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="OPEN PRICE"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="varPrice">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="PRICE"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="Price_label">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Price:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="High_label">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="High:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="Low_label">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Low:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="varHigh">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="HIGH"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="varLow">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="LOW"/>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="CloseButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Close"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CloseButtonActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
