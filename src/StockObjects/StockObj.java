@@ -1,3 +1,5 @@
+package StockObjects;
+
 import java.security.acl.LastOwnerException;
 import java.util.Arrays;
 import java.util.Date;
@@ -11,6 +13,8 @@ public class StockObj {
 	protected double openPrice;
 	protected double dayHigh;
 	protected double dayLow;
+	protected double alertLow;
+	protected double alertHigh;
 	protected String link;
 	protected String[] csvData;
 	protected boolean valid = false;
@@ -73,8 +77,31 @@ public class StockObj {
 		System.out.printf("%-10s %s", "Current:", "$ " + this.price + "\n");
 		System.out.printf("%-10s %s", "Open:", "$ " + this.openPrice + "\n");
 		System.out.printf("%-10s %s", "High/Low:", "$ " + this.dayHigh +"/" + this.dayLow + "\n\n");
+		
+		// check if outside of user bounds
+		if ((this.alertHigh > 0) && (this.price > this.alertHigh)) {
+			System.out.println("Current trade price above user set bound of " + this.alertHigh);
+		} else if (this.price < this.alertLow) {
+			System.out.println("Current trade price below user set bound of " + this.alertLow);
+		}
 	}
 
+	public void setAlertLow(double newLow) {
+		this.alertLow = newLow;
+	}
+	
+	public double getAlertLow() {
+		return this.alertLow;
+	}
+	
+	public void setAlertHigh(double newHigh) {
+		this.alertHigh = newHigh;
+	}
+	
+	public double getAlertHigh() {
+		return this.alertHigh;
+	}
+	
 	public String getSymbol() {
 		return this.symbol;
 	}
