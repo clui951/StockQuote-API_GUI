@@ -48,9 +48,13 @@ public class StockQuoteMain extends javax.swing.JFrame {
 
         jLabel4.setText("Refresh Rate (per minute):");
 
+        HighTextField.setText("0");
+
         jLabel2.setText("Alert High:");
 
         jLabel1.setText("Stock Symbol:");
+
+        LowTextField.setText("0");
 
         jLabel3.setText("Alert Low:");
 

@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package StockQuoteGUI;
-import StockObjects.*;
+import StockObjects.StockObj;
+
 /**
  *
  * @author calvinlui
@@ -18,8 +19,8 @@ public class StockQuotePage extends javax.swing.JFrame {
     
     public StockQuotePage(String inSym, Double inHigh, Double inLow) {
         initComponents();
-        this.myStock = new StockObj(inSym);
-        varSymbol.setText(inSym);
+        this.myStock = new StockObjects.StockObj(inSym);
+        varSymbol.setText(myStock.getName() + " - " + inSym); 
     }
 
     /**
@@ -32,14 +33,11 @@ public class StockQuotePage extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        SymbolLabel = new javax.swing.JLabel();
         varSymbol = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Stock Quote Details"));
-
-        SymbolLabel.setText("Symbol:");
 
         varSymbol.setText("jLabel2");
 
@@ -48,20 +46,16 @@ public class StockQuotePage extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(SymbolLabel)
-                .addGap(28, 28, 28)
+                .addGap(37, 37, 37)
                 .addComponent(varSymbol)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(294, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SymbolLabel)
-                    .addComponent(varSymbol))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(varSymbol)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -120,7 +114,6 @@ public class StockQuotePage extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel SymbolLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel varSymbol;
     // End of variables declaration//GEN-END:variables
