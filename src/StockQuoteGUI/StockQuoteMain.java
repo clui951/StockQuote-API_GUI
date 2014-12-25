@@ -6,6 +6,8 @@
 package StockQuoteGUI;
 
 import StockObjects.StockObj;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
         
 /**
@@ -161,7 +163,8 @@ public class StockQuoteMain extends javax.swing.JFrame {
         String inSymbol = SymbolTextField.getText();
         Double inHigh = Double.parseDouble(HighTextField.getText());
         Double inLow = Double.parseDouble(LowTextField.getText());
-        StockQuotePage stockPage = new StockQuotePage(inSymbol, inHigh, inLow);
+        int inRefresh = (int) RefreshSpinner.getValue();
+        StockQuotePage stockPage = new StockQuotePage(inSymbol, inHigh, inLow, inRefresh);
         stockPage.setVisible(true);
     }//GEN-LAST:event_OkayButtonActionPerformed
 

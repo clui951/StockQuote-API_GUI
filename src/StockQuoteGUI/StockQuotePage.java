@@ -10,19 +10,26 @@ import StockObjects.StockObj;
  *
  * @author calvinlui
  */
+
+
 public class StockQuotePage extends javax.swing.JFrame {
 
     /**
      * Creates new form StockQuotePage
      */
+    public final int OFF = 0;
+    public final int ON = 1;
     StockObj myStock;
+    int refreshPerMin;
+    int state = OFF;
     
-    public StockQuotePage(String inSym, Double inHigh, Double inLow) {
+    public StockQuotePage(String inSym, Double inHigh, Double inLow, int inRefresh) {
         initComponents();
         this.myStock = new StockObjects.StockObj(inSym);
         this.myStock.setAlertHigh(inHigh);
         this.myStock.setAlertLow(inLow);
         this.LoadDataToPage();
+        this.refreshPerMin = inRefresh; 
     }
     
     public void LoadDataToPage() {
@@ -32,7 +39,24 @@ public class StockQuotePage extends javax.swing.JFrame {
         varOpen.setText(Double.toString(myStock.getOpenPrice()));
         varHigh.setText(Double.toString(myStock.getDayHigh()));
         varLow.setText(Double.toString(myStock.getDayLow()));
-
+    }
+    
+    public void RefreshOnce() {
+        this.myStock.updateQuote();
+        this.LoadDataToPage();
+    }
+    
+    public void RunInBackground() {
+        while (true) {
+            try {
+                Thread.sleep(3000);
+            } catch (Exception e) {
+                Thread.currentThread().interrupt();
+            }
+            if (UpdateToggleButton.isSelected()) {
+                this.RefreshOnce();
+            }
+        }
     }
 
     /**
@@ -56,6 +80,7 @@ public class StockQuotePage extends javax.swing.JFrame {
         varHigh = new javax.swing.JLabel();
         varLow = new javax.swing.JLabel();
         CloseButton = new javax.swing.JButton();
+        UpdateToggleButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -139,6 +164,13 @@ public class StockQuotePage extends javax.swing.JFrame {
             }
         });
 
+        UpdateToggleButton.setText("Start");
+        UpdateToggleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateToggleButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,6 +181,8 @@ public class StockQuotePage extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(UpdateToggleButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CloseButton)
                 .addGap(15, 15, 15))
         );
@@ -158,7 +192,9 @@ public class StockQuotePage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(CloseButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CloseButton)
+                    .addComponent(UpdateToggleButton))
                 .addContainerGap())
         );
 
@@ -169,40 +205,16 @@ public class StockQuotePage extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_CloseButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(StockQuotePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(StockQuotePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(StockQuotePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(StockQuotePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new StockQuotePage().setVisible(true);
-//            }
-//        });
-//    }
+    private void UpdateToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateToggleButtonActionPerformed
+        if (this.state == this.OFF) {
+            UpdateToggleButton.setText("Stop");
+            this.state = this.ON;
+        } else {
+            UpdateToggleButton.setText("Start");
+            this.state = this.OFF;
+        }
+    }//GEN-LAST:event_UpdateToggleButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CloseButton;
@@ -210,6 +222,7 @@ public class StockQuotePage extends javax.swing.JFrame {
     private javax.swing.JLabel Low_label;
     private javax.swing.JLabel Open_label;
     private javax.swing.JLabel Price_label;
+    private javax.swing.JToggleButton UpdateToggleButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel varHigh;
     private javax.swing.JLabel varLow;
