@@ -88,7 +88,6 @@ public class StockQuotePage extends javax.swing.JFrame {
         varHigh = new javax.swing.JLabel();
         varLow = new javax.swing.JLabel();
         CloseButton = new javax.swing.JButton();
-        UpdateToggleButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -172,13 +171,6 @@ public class StockQuotePage extends javax.swing.JFrame {
             }
         });
 
-        UpdateToggleButton.setText("Start");
-        UpdateToggleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateToggleButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,8 +181,6 @@ public class StockQuotePage extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(UpdateToggleButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CloseButton)
                 .addGap(15, 15, 15))
         );
@@ -200,9 +190,7 @@ public class StockQuotePage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CloseButton)
-                    .addComponent(UpdateToggleButton))
+                .addComponent(CloseButton)
                 .addContainerGap())
         );
 
@@ -215,16 +203,6 @@ public class StockQuotePage extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_CloseButtonActionPerformed
 
-    private void UpdateToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateToggleButtonActionPerformed
-        if (this.state == this.OFF) {
-            UpdateToggleButton.setText("Stop");
-            this.state = this.ON;
-        } else {
-            UpdateToggleButton.setText("Start");
-            this.state = this.OFF;
-        }
-    }//GEN-LAST:event_UpdateToggleButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CloseButton;
@@ -232,7 +210,6 @@ public class StockQuotePage extends javax.swing.JFrame {
     private javax.swing.JLabel Low_label;
     private javax.swing.JLabel Open_label;
     private javax.swing.JLabel Price_label;
-    private javax.swing.JToggleButton UpdateToggleButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel varHigh;
     private javax.swing.JLabel varLow;

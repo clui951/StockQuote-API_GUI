@@ -15,14 +15,17 @@ public class GUIThread extends Thread {
     Double threadHigh;
     Double threadLow;
     int threadRefresh;
+    boolean notFin;
     
     public void run() {
+        notFin = true;
         StockQuotePage myStockPage = new StockQuotePage(threadSym, threadHigh, threadLow, threadRefresh);
         myStockPage.setVisible(true);
         if (threadRefresh != 0) {
-            while (myStockPage.myStock.isValid()) {
+            while (notFin) {
                 try {
                     Thread.sleep(1000 * threadRefresh);
+                    notFin = myStockPage.myStock.isValid();
                 } catch (Exception e) {}
                 myStockPage.RefreshOnce();
             }
