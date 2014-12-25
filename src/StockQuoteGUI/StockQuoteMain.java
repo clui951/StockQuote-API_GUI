@@ -164,8 +164,9 @@ public class StockQuoteMain extends javax.swing.JFrame {
         Double inHigh = Double.parseDouble(HighTextField.getText());
         Double inLow = Double.parseDouble(LowTextField.getText());
         int inRefresh = (int) RefreshSpinner.getValue();
-        StockQuotePage stockPage = new StockQuotePage(inSymbol, inHigh, inLow, inRefresh);
-        stockPage.setVisible(true);
+        GUIThread newThread = new GUIThread();
+        newThread.getArgs(inSymbol, inHigh, inLow, inRefresh);
+        newThread.start();
     }//GEN-LAST:event_OkayButtonActionPerformed
 
     /**

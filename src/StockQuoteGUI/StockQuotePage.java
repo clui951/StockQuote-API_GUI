@@ -5,6 +5,8 @@
  */
 package StockQuoteGUI;
 import StockObjects.StockObj;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -46,17 +48,19 @@ public class StockQuotePage extends javax.swing.JFrame {
         this.LoadDataToPage();
     }
     
+    // TESTING JAVA THREADING
+//    public void run() {
+//        if (this.state == this.OFF) {
+//            UpdateToggleButton.setText("Stop");
+//            this.state = this.ON;
+//        } else {
+//            UpdateToggleButton.setText("Start");
+//            this.state = this.OFF;
+//        }
+//    }
+    
     public void RunInBackground() {
-        while (true) {
-            try {
-                Thread.sleep(3000);
-            } catch (Exception e) {
-                Thread.currentThread().interrupt();
-            }
-            if (UpdateToggleButton.isSelected()) {
-                this.RefreshOnce();
-            }
-        }
+        
     }
 
     /**
