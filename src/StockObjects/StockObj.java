@@ -137,5 +137,9 @@ public class StockObj {
 	public boolean isValid() {
 		return this.valid;
 	}
+        
+        public void setValid(boolean bool) {
+            this.valid = bool;
+        }
 
 }

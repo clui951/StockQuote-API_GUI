@@ -5,6 +5,8 @@
  */
 package StockQuoteGUI;
 import StockObjects.StockObj;
+import java.awt.Color;
+import java.awt.Toolkit;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,7 +39,19 @@ public class StockQuotePage extends javax.swing.JFrame {
     public void LoadDataToPage() {
         varSymbol.setText(myStock.getName() + " - " + myStock.getSymbol());
         varTime.setText(myStock.getTime());
-        varPrice.setText(Double.toString(myStock.getPrice()));
+        Double price = myStock.getPrice();
+        Double high = myStock.getAlertHigh();
+        Double low = myStock.getAlertLow();
+        varPrice.setText(Double.toString(price));
+        if ( (price > high) && (high != 0)) {
+            varPrice.setForeground(Color.red);
+            Toolkit.getDefaultToolkit().beep();
+        } else if ((price < low) && (low != 0)) {
+            varPrice.setForeground(Color.red);
+            Toolkit.getDefaultToolkit().beep();
+        } else {
+            varPrice.setForeground(Color.black);
+        }
         varOpen.setText(Double.toString(myStock.getOpenPrice()));
         varHigh.setText(Double.toString(myStock.getDayHigh()));
         varLow.setText(Double.toString(myStock.getDayLow()));
@@ -48,16 +62,6 @@ public class StockQuotePage extends javax.swing.JFrame {
         this.LoadDataToPage();
     }
     
-    // TESTING JAVA THREADING
-//    public void run() {
-//        if (this.state == this.OFF) {
-//            UpdateToggleButton.setText("Stop");
-//            this.state = this.ON;
-//        } else {
-//            UpdateToggleButton.setText("Start");
-//            this.state = this.OFF;
-//        }
-//    }
     
     public void RunInBackground() {
         
@@ -206,6 +210,8 @@ public class StockQuotePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CloseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseButtonActionPerformed
+        this.myStock.setValid(false);
+        this.setVisible(false);
         dispose();
     }//GEN-LAST:event_CloseButtonActionPerformed
 

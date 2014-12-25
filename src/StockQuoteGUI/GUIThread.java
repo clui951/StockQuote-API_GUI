@@ -19,11 +19,13 @@ public class GUIThread extends Thread {
     public void run() {
         StockQuotePage myStockPage = new StockQuotePage(threadSym, threadHigh, threadLow, threadRefresh);
         myStockPage.setVisible(true);
-        while (true) {
-            try {
-                Thread.sleep(1000 * threadRefresh);
-            } catch (Exception e) {}
-            myStockPage.RefreshOnce();
+        if (threadRefresh != 0) {
+            while (myStockPage.myStock.isValid()) {
+                try {
+                    Thread.sleep(1000 * threadRefresh);
+                } catch (Exception e) {}
+                myStockPage.RefreshOnce();
+            }
         }
     }
     
